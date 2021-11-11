@@ -14,7 +14,7 @@ function App() {
 
     const fetchCounter = async () => {
 
-      const { data } = await axios.get('https://interview-8e4c5-default-rtdb.firebaseio.com/front-end/counter1.json')
+      const { data } = await axios.get(process.env.REACT_APP_GET_API)
 
       if (data == null) {
         setCounter(1);

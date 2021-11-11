@@ -28,7 +28,7 @@ const Counter = () => {
         setLoading(true)
         setCounter(local)
 
-        await axios.put('https://interview-8e4c5-default-rtdb.firebaseio.com/front-end.json', {
+        await axios.put(process.env.REACT_APP_PUT_API, {
             "rohit_gupta": local
         })
 
