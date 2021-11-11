@@ -1,24 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+import Counter from './components/counter component/Counter';
+import CounterValue from './components/counter value component/CounterValue';
+import axios from 'axios'
+import CounterContext from './Context/CounterContext';
 
 function App() {
+
+  const [counter, setCounter] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [maxValue, setMaxValue] = useState(1000);
+
+  useEffect(() => {
+
+    const fetchCounter = async () => {
+
+      const { data } = await axios.get('https://interview-8e4c5-default-rtdb.firebaseio.com/front-end/counter1.json')
+
+      if (data == null) {
+        setCounter(1);
+        setMaxValue(1000);
+      }
+      else {
+        setCounter(data);
+        setMaxValue(data);
+      }
+
+    }
+
+    fetchCounter();
+
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CounterContext.Provider value={{
+      counter: counter,
+      setCounter: setCounter,
+      loading: loading,
+      setLoading: setLoading,
+      maxValue: maxValue,
+      setMaxValue: setMaxValue
+    }}>
+      <div className="App" >
+        <Counter />
+        <CounterValue />
+      </div>
+    </CounterContext.Provider>
   );
 }
 

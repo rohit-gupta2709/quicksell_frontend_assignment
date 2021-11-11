@@ -1,0 +1,14 @@
+.CounterValueBox{
+    display: flex;
+    width: 180px;
+    align-items: flex-start;
+    font-size: 15px;
+    font-weight: 600;
+    color: #000000;
+    margin-top: 10px;
+}
+
+.CounterValueBox p{
+    margin-top: 5px;
+    margin-right: 3px;
+}
